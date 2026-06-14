@@ -1,0 +1,70 @@
+.opp-card {
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.opp-card h4 {
+  font-size: 17px;
+  color: #2c3e50;
+  margin-bottom: 8px;
+}
+
+.opp-card p {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.opp-meta {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.badge {
+  background-color: #3498db;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+.deadline {
+  font-size: 12px;
+  color: #e74c3c;
+  font-weight: 600;
+}
+
+.btn-apply {
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-apply:hover {
+  background-color: #27ae60;
+}
+
+.btn-delete {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.btn-delete:hover {
+  background-color: #c0392b;
+}
