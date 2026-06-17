@@ -1,70 +1,149 @@
-# Getting Started with Create React App
+🎓 Student Opportunity Tracker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack web application that helps students discover and track internships, hackathons, scholarships, jobs, and certifications — all in one place, with personalized recommendations and automated deadline reminders.
 
-## Available Scripts
+🚀 Live Demo
 
-In the project directory, you can run:
 
-### `npm start`
+Frontend: https://student-opportunity-tracker-fronten.vercel.app/login
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+📌 Problem Statement
 
-### `npm test`
+Students often miss out on valuable opportunities — scholarships, internships, hackathons — simply because they're scattered across dozens of websites. This platform centralizes these opportunities, lets students filter by their interests, and notifies them before deadlines pass.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+✨ Features
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+🔐 JWT Authentication — Secure register/login system
+👥 Role-Based Access Control — Separate permissions for Admins and Students
+📋 Opportunity Management — Full CRUD for internships, hackathons, scholarships, jobs, and certifications
+🔍 Search & Filter — Find opportunities by category or keyword
+🎯 Personalized Recommendations — Opportunities matched to a student's selected interests
+🌐 Real-Time Job Integration — Pulls live internship/job listings via the Adzuna API
+📧 Automated Email Notifications — Welcome emails on signup and daily deadline reminders
+⏰ Background Scheduler — Daily automated job (APScheduler) that checks upcoming deadlines and emails relevant users
+💻 Responsive React Frontend — Clean dashboard and opportunity browser
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+🛠️ Tech Stack
 
-### `npm run eject`
+Backend
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Python, FastAPI
+PostgreSQL + SQLAlchemy (ORM)
+JWT (python-jose) for authentication
+Passlib (bcrypt) for password hashing
+APScheduler for background jobs
+FastAPI-Mail for email notifications
+Adzuna API for real-time job/internship data
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Frontend
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+React.js
+React Router DOM
+Axios
+React Toastify
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+Backend: Render (with managed PostgreSQL)
+Frontend: Vercel
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+🏗️ Architecture
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+student-opportunity-tracker/
+├── app/
+│   ├── models/          # SQLAlchemy database models
+│   ├── schemas/         # Pydantic request/response schemas
+│   ├── routers/         # API route handlers (auth, users, opportunities)
+│   ├── services/        # Email service, Adzuna fetcher, scheduler
+│   ├── utils/           # Auth utilities (JWT, password hashing)
+│   ├── database.py      # DB connection & session management
+│   ├── config.py        # Environment-based settings
+│   └── main.py          # FastAPI app entry point
+└── requirements.txt
 
-### Advanced Configuration
+🔑 API Endpoints
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+MethodEndpointDescriptionAccessPOST/auth/registerRegister a new userPublicPOST/auth/loginLogin and receive JWT tokenPublicGET/users/meGet current user profileAuthenticatedPATCH/users/me/interestsUpdate interest categoriesAuthenticatedGET/opportunities/List opportunities (with filters)AuthenticatedGET/opportunities/recommendedGet interest-based recommendationsAuthenticatedGET/opportunities/{id}Get a single opportunityAuthenticatedPOST/opportunities/Create a new opportunityAdmin onlyPUT/opportunities/{id}Update an opportunityAdmin onlyDELETE/opportunities/{id}Delete an opportunityAdmin onlyPOST/opportunities/fetch-from-apiFetch live listings from AdzunaAdmin only
 
-### Deployment
+Full interactive API documentation is available via Swagger UI at /docs.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+⚙️ Getting Started Locally
 
-### `npm run build` fails to minify
+Prerequisites
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+Python 3.10+
+Node.js 18+
+PostgreSQL
+
+
+Backend Setup
+
+bashgit clone https://github.com/yourusername/student-opportunity-tracker-backend.git
+cd student-opportunity-tracker-backend
+python -m venv venv
+venv\Scripts\activate          # Windows
+pip install -r requirements.txt
+
+Create a .env file in the root directory:
+
+envDATABASE_URL=postgresql://postgres:yourpassword@localhost:5432/opportunity_tracker
+SECRET_KEY=your_secret_key
+ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+MAIL_USERNAME=your_email@gmail.com
+MAIL_PASSWORD=your_gmail_app_password
+MAIL_FROM=your_email@gmail.com
+ADZUNA_APP_ID=your_adzuna_app_id
+ADZUNA_APP_KEY=your_adzuna_app_key
+
+Run the server:
+
+bashuvicorn app.main:app --reload
+
+API will be live at http://localhost:8000 — Swagger docs at http://localhost:8000/docs.
+
+Frontend Setup
+
+bashgit clone https://github.com/yourusername/student-opportunity-tracker-frontend.git
+cd student-opportunity-tracker-frontend
+npm install
+npm start
+
+Frontend will be live at http://localhost:3000.
+
+🎯 What I Learned
+
+This project was built to gain hands-on experience with production-grade backend development, including:
+
+
+Designing RESTful APIs with proper resource modeling
+Implementing secure authentication and role-based authorization
+Working with relational databases via an ORM
+Integrating third-party APIs for real-world data
+Building background jobs and scheduled tasks
+Connecting a React frontend to a FastAPI backend end-to-end
+Deploying a full-stack application to production
+
+
+📄 License
+
+This project is open source and available under the MIT License.
+
+👤 Author
+
+Mayur Mahindrakar
+Computer Engineering Student, VIIT Pune
+
+
+GitHub: @mayurmahi
+LinkedIn: https://www.linkedin.com/in/mayur-mahindrakar-932092291?utm_source=share_via&utm_content=profile&utm_medium=member_android
